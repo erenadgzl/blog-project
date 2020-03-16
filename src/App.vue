@@ -1,17 +1,63 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <app-header></app-header>
+    <router-view></router-view>
+    <app-footer></app-footer>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import AppHeader from './components/Header'
+import AppFooter from './components/Footer'
+import firebase from 'firebase';
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
+    AppHeader,
+    AppFooter
+  },
+  mounted(){
+ // Your web app's Firebase configuration
+  var firebaseConfig = {
+    apiKey: "AIzaSyDlvwL0s1MdyXVlu7DVnzONVa87YD2WdFI",
+    authDomain: "igneous-tracer-250513.firebaseapp.com",
+    databaseURL: "https://igneous-tracer-250513.firebaseio.com",
+    projectId: "igneous-tracer-250513",
+    storageBucket: "igneous-tracer-250513.appspot.com",
+    messagingSenderId: "837296512959",
+    appId: "1:837296512959:web:47a578de79ff4e524a8b0a",
+    measurementId: "G-82TFTJBTQS"
+  };
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+  firebase.analytics();
+  this.checkAuthExpires();
+  }, 
+  watch: {
+    $route(to) {
+      if(to.path!='/login'){
+        this.checkAuthExpires()
+      }
+    } 
+  },
+  methods: {
+    checkAuthExpires() {
+        this.currentDate = Date.now();
+        if (this.$route.path!="/login" && (localStorage.getItem("expires") == null || this.currentDate > localStorage.getItem("expires"))) {
+          this.logOut();
+        }
+    },
+    logOut(){
+      firebase.auth().signOut().then(function() {
+        // Sign-out successful.
+      }, function() {
+        // An error happened.
+      });
+      localStorage.clear();
+      this.$router.push('/login')
+      window.location.reload();
+    }
   }
 }
 </script>
