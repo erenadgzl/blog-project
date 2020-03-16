@@ -36,7 +36,7 @@ export default {
   }, 
   watch: {
     $route(to) {
-      if(to.path!='/login'){
+      if(to.path!='/login' && to.path!='/register'){
         this.checkAuthExpires()
       }
     } 
@@ -44,8 +44,10 @@ export default {
   methods: {
     checkAuthExpires() {
         this.currentDate = Date.now();
-        if (this.$route.path!="/login" && (localStorage.getItem("expires") == null || this.currentDate > localStorage.getItem("expires"))) {
-          this.logOut();
+        if(this.$route.path!="/login" && this.$route.path!="/register") {
+            if ((localStorage.getItem("expires") == null || this.currentDate > localStorage.getItem("expires"))) {
+            this.logOut();
+            }
         }
     },
     logOut(){

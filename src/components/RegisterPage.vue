@@ -1,8 +1,8 @@
 <template>
   <div>
     <b-container fluid="sm">
-      <b-card class="login-content" header="Login">
-        <b-form class="sm-3" @reset="onReset">
+      <b-card class="login-content" header="Register">
+        <b-form class="sm-3" @reset="goBack">
           <b-form-row>
             <b-col>
               <b-form-group
@@ -37,18 +37,11 @@
           </b-form-row>
           <b-form-row>
             <b-col class="login-button-row">
-              <b-button @click="onSubmit" type="button" variant="primary">Submit</b-button>
-              <b-button type="reset" variant="danger">Reset</b-button>
+              <b-button @click="createUser" type="button" variant="primary">Register</b-button>
+              <b-button type="reset" variant="outline-primary">Go Back</b-button>
             </b-col>
           </b-form-row>
         </b-form>
-        <b-col>
-              <b-form-group
-                label="Not a member yet?"
-              >
-                <b-button type="reset" variant="success" @click="goToRegisterPage">Register</b-button>
-              </b-form-group>
-            </b-col>
       </b-card>
     </b-container>
   </div>
@@ -62,33 +55,25 @@ export default {
     return {
       form: {
         email: "",
-        password: "",
-        returnSecureToken: true
+        password: ""
       }
     };
   },
   methods: {
-    onSubmit() {
+    createUser() {
       firebase
         .auth()
-        .signInWithEmailAndPassword(this.form.email, this.form.password)
+        .createUserWithEmailAndPassword(this.form.email, this.form.password)
         .then(function() {
-          var user = firebase.auth().currentUser;
-          localStorage.setItem("expires",user.b.c)
-          localStorage.setItem("firebaseToken",user.b.b)
-          router.push('/')
+            router.push("/login")
         })
         .catch(function() {
           // Handle Errors here.
           // ...
         });
     },
-    onReset() {
-      this.form.email = "";
-      this.form.password = "";
-    },
-    goToRegisterPage(){
-      router.push('/register')
+    goBack() {
+      router.push("/login")
     }
   }
 };
