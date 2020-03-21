@@ -16,3 +16,10 @@
 .login-button-row > button {
   margin: 3px;
 }
+
+.post-add-content{
+  width: 75rem;
+  margin-top: 5rem;
+  margin-left: auto;
+  margin-right: auto;
+}
