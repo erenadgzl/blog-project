@@ -1,19 +1,19 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 
-import HelloWorld from "./components/HelloWorld"
 import LoginPage from "./components/LoginPage"
 import RegisterPage from "./components/RegisterPage"
 import PostAdd from "./components/post/PostAdd"
+import PostList from "./components/post/PostList"
 
 Vue.use(VueRouter);
 
 const routes = [
-  { path : "/", component : HelloWorld },
+  { path : "/post", component : PostList },
+  { path : "/post/add", component : PostAdd},
   { path : "/login", component : LoginPage },
   { path : "/register", component : RegisterPage},
-  { path : "/post/add", component : PostAdd},
-  { path : "*", redirect : "/"}
+  { path : "*", redirect : "/post"}
 ];
 
 export const router = new VueRouter({
