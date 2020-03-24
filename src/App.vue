@@ -11,14 +11,7 @@ import AppHeader from './components/Header'
 import AppFooter from './components/Footer'
 import firebase from 'firebase';
 
-export default {
-  name: 'App',
-  components: {
-    AppHeader,
-    AppFooter
-  },
-  mounted(){
- // Your web app's Firebase configuration
+// Your web app's Firebase configuration
   var firebaseConfig = {
     apiKey: "AIzaSyDlvwL0s1MdyXVlu7DVnzONVa87YD2WdFI",
     authDomain: "igneous-tracer-250513.firebaseapp.com",
@@ -32,6 +25,14 @@ export default {
   // Initialize Firebase
   firebase.initializeApp(firebaseConfig);
   firebase.analytics();
+  
+export default {
+  name: 'App',
+  components: {
+    AppHeader,
+    AppFooter
+  },
+  mounted(){
   this.checkAuthExpires();
   }, 
   watch: {
