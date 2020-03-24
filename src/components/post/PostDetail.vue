@@ -1,7 +1,7 @@
 <template>
   <div>
     <b-container fluid="sm">
-      <b-card class="post-add-content" header="Post Add">
+      <b-card class="post-add-content" header="Post Detail">
         <b-form class="sm-3" @reset="onReset">
           <b-form-row>
             <b-col>
@@ -35,7 +35,7 @@
   </b-row>
           <b-form-row>
             <b-col class="login-button-row">
-              <b-button @click="onSubmit" type="button" variant="primary">Submit</b-button>
+              <b-button @click="onSubmit" type="button" variant="success">Update</b-button>
               <b-button type="reset" variant="danger">Reset</b-button>
             </b-col>
           </b-form-row>
@@ -57,16 +57,27 @@ export default {
     };
   },
   methods: {
-    onSubmit() {
+    onSubmit(){
       firebase
         .database()
-        .ref('posts')
-        .push(this.post);
+        .ref('posts/'+this.id)
+        .update(this.post);
+    },
+    async getPostDetail(id){
+        var post=null
+        var postsRef = firebase.database().ref('posts/' + id);
+        await postsRef.once('value').then(function(snapshot) {
+            post = snapshot.val()
+        });
+        this.post = post
     },
     onReset() {
       this.post.title = "";
       this.post.content = "";
     }
+  },
+  mounted: function () {
+    this.getPostDetail(this.$route.params.id)
   }
 };
 </script>
