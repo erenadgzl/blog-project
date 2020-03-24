@@ -37,6 +37,7 @@
             <b-col class="login-button-row">
               <b-button @click="onSubmit" type="button" variant="success">Update</b-button>
               <b-button type="reset" variant="danger">Reset</b-button>
+              <b-button @click="goToHome()" type="reset">Back</b-button>
             </b-col>
           </b-form-row>
         </b-form>
@@ -47,6 +48,8 @@
 
 <script>
 import firebase from "firebase"
+import { router } from "../../router";
+
 export default {
   data() {
     return {
@@ -74,6 +77,9 @@ export default {
     onReset() {
       this.post.title = "";
       this.post.content = "";
+    },
+    goToHome(){
+       router.push("/posts")
     }
   },
   mounted: function () {
