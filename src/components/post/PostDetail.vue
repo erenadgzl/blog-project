@@ -66,7 +66,7 @@ export default {
         .ref('posts/'+this.id)
         .update(this.post);
 
-      goToHome()  
+      this.goToHome()  
     },
     async getPostDetail(id){
         var post=null

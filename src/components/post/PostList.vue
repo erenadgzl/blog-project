@@ -1,7 +1,8 @@
 <template>
     <div>
     <b-container fluid="sm">
-      <b-card class="login-content" header="Post List">
+      <b-button style="margin-top:20px" @click="goToCreate">Create Post</b-button>
+      <b-card style="margin-bottom:10px" class="login-content" header="Post List">
         <b-list-group  v-for="(post,index) in posts" :key="index">
           <b-list-group-item @click="postDetail(post.id)" button >{{post.title}}</b-list-group-item>
           <b-icon @click="deletePost(post.id)" style="height:30px; background-color: #ff4d4d; width:100%; color: #ffe6e6;border-radius: 0 0 10px 10px; margin-bottom:10px; cursor:pointer" icon="trash"></b-icon>
@@ -47,6 +48,9 @@ export default {
           console.log("Remove failed: " + error.message)
         });  
         this.getPost()
+    },
+    goToCreate(){
+      router.push("/post/add")
     }
   },
   mounted: function () {
