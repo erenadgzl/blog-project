@@ -13,14 +13,14 @@ import firebase from 'firebase';
 
 // Your web app's Firebase configuration
   var firebaseConfig = {
-    apiKey: "AIzaSyDlvwL0s1MdyXVlu7DVnzONVa87YD2WdFI",
-    authDomain: "igneous-tracer-250513.firebaseapp.com",
-    databaseURL: "https://igneous-tracer-250513.firebaseio.com",
-    projectId: "igneous-tracer-250513",
-    storageBucket: "igneous-tracer-250513.appspot.com",
-    messagingSenderId: "837296512959",
-    appId: "1:837296512959:web:47a578de79ff4e524a8b0a",
-    measurementId: "G-82TFTJBTQS"
+    apiKey: "",
+    authDomain: "",
+    databaseURL: "",
+    projectId: "",
+    storageBucket: "",
+    messagingSenderId: "",
+    appId: "",
+    measurementId: ""
   };
   // Initialize Firebase
   firebase.initializeApp(firebaseConfig);
